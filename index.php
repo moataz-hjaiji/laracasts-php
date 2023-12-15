@@ -2,7 +2,7 @@
 
 require 'functions.php';
 require 'Database.php';
-// require 'routes.php';
+ require 'routes.php';
 
 // connect to databases, and execute a query.
 
@@ -15,9 +15,9 @@ $posts = $db->query('select * from posts')->fetchAll();
 
 // echo '<p>'.$posts['title'].'</p>';
 
-foreach($posts as $post){
-  echo "<li>".$post['title']."</li>";
-}
+//foreach($posts as $post){
+//  echo "<li>".$post['title']."</li>";
+//}
 
 
 // class Person {
