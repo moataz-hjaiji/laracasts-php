@@ -1,26 +1,44 @@
 <?php
 class Database {
   public $connection;
+    public  $statement;
 
-  public function __construct()
+    public function __construct(private array $config)
   {
-    $config = [
-      'host' => 'localhost',
-      'post' => 3306,
-      'dbname' => 'myapp',
-      'charset' => 'utf8mb4'
-    ];
-    $dsn = 'mysql:host=localhost;port=3306;dbname=myapp;user=root;charset=utf8mb4;';
-    $this->connection = new PDO($dsn,'root','',[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+      try {
+          $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};user={$config['user_db']};charset={$config['charset']};";
+          $this->connection = new PDO($dsn,'root','',[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+
+      } catch (PDOException $e) {
+          echo 'Connection failed: ' . $e->getMessage();
+      }
   }
 
 
-  public function query($query){
-    
-    $statement = $this->connection->prepare($query);
-    $statement->execute(); 
+  private function query($query,$params){
 
-    return  $statement;
+    $this->statement = $this->connection->prepare($query);
+    $this->statement->execute($params);
+
+    return $this;
+  }
+  public function find($query,$params)
+  {
+      $this->query($query,$params);
+      return $this->statement->fetch();
+  }
+  public function findOrFail($query,$params)
+  {
+    $result = $this->find($query,$params);
+    if(!$result){
+        abort();
+    }
+    return $result;
+  }
+  public function findAll($query,$params)
+  {
+      $result =  $this->query($query,$params);
+      return $this->statement->fetchAll();
   }
 };
 
