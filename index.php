@@ -2,7 +2,7 @@
 
 require 'functions.php';
 require 'Database.php';
-// require 'routes.php';
+require 'routes.php';
 
 // connect to databases, and execute a query.
 
