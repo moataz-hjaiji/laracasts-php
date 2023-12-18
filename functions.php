@@ -15,3 +15,13 @@ function authorize($condition,$status = Response::FORBIDDEN)
         abort($status);
     }
 }
+
+function base_url($path): string
+{
+    return BASE_URL.$path;
+}
+function view($path,$arg): string
+{
+    extract($arg);
+    require base_url("views/{$path}.view.html");
+}

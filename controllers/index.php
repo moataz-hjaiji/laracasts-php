@@ -5,4 +5,6 @@ $heading = "Home";
 
 
 
-require 'views/index.view.html';
+view('index',[
+    'heading' => 'Home'
+]);

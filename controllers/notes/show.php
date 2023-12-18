@@ -11,4 +11,4 @@ $note = $db->findOrFail('select * from notes where id = :id',['id'=>$note_id]);
 
 authorize($note['user_id']===$currentUserId);
 
-require  'views/note.view.html';
+require 'views/notes/show.view.html';
