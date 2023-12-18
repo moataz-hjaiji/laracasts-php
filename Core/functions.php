@@ -9,7 +9,7 @@ function dd($value){
     echo '</pre>';
     die();
 }
-function authorize($condition,$status = Response::FORBIDDEN)
+function authorize($condition,$status = Response::FORBIDDEN): void
 {
     if(!$condition){
         abort($status);
@@ -20,8 +20,9 @@ function base_url($path): string
 {
     return BASE_URL.$path;
 }
-function view($path,$arg): string
+function view($path,$arg=[]): string
 {
     extract($arg);
     require base_url("views/{$path}.view.html");
 }
+

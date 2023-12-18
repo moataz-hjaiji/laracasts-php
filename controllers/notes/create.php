@@ -1,11 +1,10 @@
 <?php
 $heading = "Create Note";
-
+$errors = [];
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $config = require base_url('config.php');
-    dd($config);
     $db = new Database($config["database"]);
-    $errors = [];
+
     $body =  htmlspecialchars($_POST['body']);
     if(!Validator::isString($body,1,1000)){
 
@@ -18,4 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 
 
-view('notes/create');
+view('notes/create', [
+    'heading' => 'Create Note',
+    'errors' => $errors
+]);

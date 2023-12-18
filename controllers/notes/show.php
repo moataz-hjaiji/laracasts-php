@@ -3,12 +3,14 @@ $heading = 'note';
 $note_id = $_GET['id'];
 $currentUserId = 1;
 
-$config = require('config.php');
-$db = new Database($config["database"]);
-
+$config = require base_url('config.php');
+$db = new Database($config['database']);
 $note = $db->findOrFail('select * from notes where id = :id',['id'=>$note_id]);
 
 
 authorize($note['user_id']===$currentUserId);
 
-require 'views/notes/show.view.html';
+view('notes/show',[
+    'heading' => 'Note',
+    'note' => $note,
+]);
