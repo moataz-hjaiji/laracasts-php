@@ -1,5 +1,7 @@
 <?php
-$heading = "Create Note";
+use Core\Database;
+use Core\Validator;
+
 $errors = [];
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $config = require base_url('config.php');

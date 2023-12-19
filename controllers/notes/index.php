@@ -1,6 +1,6 @@
 <?php
 
-$heading = 'My Notes';
+use Core\Database;
 
 $notes = [];
 $config = require base_url('config.php');

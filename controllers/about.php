@@ -1,6 +1,5 @@
 <?php
 
-$heading = "About";
 
 view('about',
 [

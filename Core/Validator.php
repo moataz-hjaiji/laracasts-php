@@ -1,4 +1,6 @@
 <?php
+
+namespace Core;
 class Validator
 {
     public static function isString($value,$min=1,$max=INF): bool

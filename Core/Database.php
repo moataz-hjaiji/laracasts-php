@@ -1,6 +1,9 @@
 <?php
+
+namespace Core;
+use PDO;
 class Database {
-  public $connection;
+  public PDO $connection;
     public  $statement;
 
     public function __construct(private array $config)
@@ -9,13 +12,14 @@ class Database {
           $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};user={$config['user_db']};charset={$config['charset']};";
           $this->connection = new PDO($dsn,'root','',[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
-      } catch (PDOException $e) {
+      } catch (\PDOException $e) {
           echo 'Connection failed: ' . $e->getMessage();
       }
   }
 
 
-  public function query($query,$params){
+  public function query($query,$params): static
+  {
 
     $this->statement = $this->connection->prepare($query);
     $this->statement->execute($params);
