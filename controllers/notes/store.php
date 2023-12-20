@@ -1,10 +1,10 @@
 <?php
 
+use Core\App;
 use Core\Database;
 use Core\Validator;
 
-$config = require base_url('config.php');
-    $db = new Database($config["database"]);
+$db = App::getContainer()->resolve('Core\Database');
 
     $body =  htmlspecialchars($_POST['body']);
     if(!Validator::isString($body,1,1000)){

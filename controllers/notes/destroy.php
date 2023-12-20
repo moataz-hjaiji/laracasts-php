@@ -1,10 +1,13 @@
 <?php
 
 use Core\Database;
+use Core\App;
 
 $currentUserId= 1;
-$config = require base_url('config.php');
-$db = new Database($config['database']);
+//$config = require base_url('config.php');
+//$db = new Database($config['database']);
+$db = App::getContainer()->resolve('Core\Database');
+
 $note_id = $_POST['id'];
 
 $note = $db->findOrFail('select * from notes where id = :id',['id'=>$note_id]);
