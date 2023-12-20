@@ -2,7 +2,8 @@
 
 
 use Core\Response;
-function urlIs($url){
+function urlIs($url): bool
+{
     return $_SERVER['REQUEST_URI'] === $url;
 }
 function dd($value){
@@ -22,7 +23,7 @@ function base_url($path): string
 {
     return BASE_URL.$path;
 }
-function view($path,$arg=[]): string
+function view($path,$arg=[]): void
 {
     extract($arg);
     require base_url("views/{$path}.view.html");
