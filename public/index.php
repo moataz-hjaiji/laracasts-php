@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 const BASE_URL = __DIR__.'/../';
 
 require BASE_URL . '/Core/functions.php';
