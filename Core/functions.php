@@ -2,6 +2,8 @@
 
 
 use Core\Response;
+use JetBrains\PhpStorm\NoReturn;
+
 function urlIs($url): bool
 {
     return $_SERVER['REQUEST_URI'] === $url;
@@ -28,10 +30,10 @@ function view($path,$arg=[]): void
     extract($arg);
     require base_url("views/{$path}.view.html");
 }
-function abort($code=Response::NOT_FOUND): void
+#[NoReturn] function abort($code=Response::NOT_FOUND): void
 {
     http_response_code($code);
-    require view("{$code}");
+     view("{$code}");
     die();
 }
 
