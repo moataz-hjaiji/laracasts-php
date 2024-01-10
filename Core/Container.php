@@ -5,7 +5,7 @@ namespace Core;
 class Container
 {
     protected array $bindings = [];
-    public function bind(string $key, $resolver)
+    public function bind(string $key, $resolver): void
     {
         $this->bindings[$key] = $resolver;
     }

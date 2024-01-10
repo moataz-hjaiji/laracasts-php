@@ -2,31 +2,30 @@
 
 use Core\App;
 use Core\Authenticator;
-use Core\Database;
-use Core\Validator;
 use Http\Forms\LoginForm;
+use Core\Session;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 $form = new LoginForm();
-if(!$form->validate($email,$password)){
-     view('session/create',[
-        "errors" => $form->getErrors()
-    ]);
-    return;
+if($form->validate($email,$password)){
+    $authenticator = new Authenticator();
+    if($authenticator->attempt($email,$password)){
+        redirect('/');
+    }
+        $form->error('email',"not found user with this email");
 };
 
-$authenticator = new Authenticator();
-if($authenticator->attempt($email,$password)){
-    redirect('/');
-}
+Session::flash("errors",$form->getErrors());
 
-$errors['email'] = "not found user with this email";
 
-view('session/create',[
-  "errors" => $errors
-]);
+redirect('/login');
+
+//view('session/create',[
+//    "errors" => $form->getErrors()
+//]);
+//return;
 
 
 

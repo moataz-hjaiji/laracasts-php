@@ -37,7 +37,7 @@ function view($path,$arg=[]): void
     die();
 }
 
-function redirect($route)
+#[NoReturn] function redirect($route) : void
 {
     header("location: {$route}");
     die();
