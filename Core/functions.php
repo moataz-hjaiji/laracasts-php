@@ -2,13 +2,14 @@
 
 
 use Core\Response;
-use JetBrains\PhpStorm\NoReturn;
+
 
 function urlIs($url): bool
 {
     return $_SERVER['REQUEST_URI'] === $url;
 }
-function dd($value){
+function dd($value): void
+{
     echo '<pre>';
     var_dump($value);
     echo '</pre>';
@@ -30,15 +31,21 @@ function view($path,$arg=[]): void
     extract($arg);
     require base_url("views/{$path}.view.html");
 }
-#[NoReturn] function abort($code=Response::NOT_FOUND): void
+function abort($code=Response::NOT_FOUND): void
 {
     http_response_code($code);
      view("{$code}");
+
     die();
 }
 
-#[NoReturn] function redirect($route) : void
+function redirect($route) : void
 {
     header("location: {$route}");
     die();
+}
+
+function old($key,$default='')
+{
+ return    Core\Session::get('old')['email'] ?? $default ;
 }

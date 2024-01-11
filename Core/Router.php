@@ -66,11 +66,15 @@ class Router
         }
         $this->abort();
     }
-    protected function abort($code=Response::NOT_FOUND)
+    protected function abort($code=Response::NOT_FOUND): void
     {
           http_response_code($code);
-          require view("{$code}");
+          view("{$code}");
           die();
+    }
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
     }
 }
 
