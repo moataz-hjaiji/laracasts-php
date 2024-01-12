@@ -1,0 +1,10 @@
+{
+    "name": "takiacademy/demo",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    }
+}

@@ -2,16 +2,13 @@
 
 use Core\Session;
 
-session_start();
-const BASE_URL = __DIR__.'/../';
 
+const BASE_URL = __DIR__.'/../';
+require BASE_URL."/vendor/autoload.php";
 require BASE_URL . '/Core/functions.php';
 
 
-spl_autoload_register(function ($class){
-    $class = str_replace('\\',DIRECTORY_SEPARATOR,$class);
-    require base_url("{$class}.php");
-});
+session_start();
 
 require base_url('bootstrap.php');
 
